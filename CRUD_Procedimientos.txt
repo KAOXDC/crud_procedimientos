@@ -1,0 +1,79 @@
+
+DELIMITER //
+CREATE PROCEDURE obtener_carros_por_marca(IN marca_nombre VARCHAR(200))
+BEGIN
+    SELECT * 
+    FROM servicios_carro as Carro
+    INNER JOIN servicios_marca as Marca ON Carro.marca_id = Marca.id
+    WHERE Marca.nombre = marca_nombre;
+END //
+DELIMITER ;
+
+CALL obtener_carros_por_marca('Toyota')
+
+DELIMITER //
+CREATE PROCEDURE insertar_carro(
+    IN p_cilindraje VARCHAR(200), 
+    IN p_color VARCHAR(200), 
+    IN p_marca_id INT
+)
+BEGIN
+    INSERT INTO servicios_carro (cilindraje, color, marca_id) 
+    VALUES (p_cilindraje, p_color, p_marca_id);
+END //
+DELIMITER ;
+
+CALL insertar_carro('2000 cc', 'Negro', 1)
+
+
+DELIMITER //
+CREATE PROCEDURE insertar_carro(
+    IN p_cilindraje VARCHAR(200), 
+    IN p_color VARCHAR(200), 
+    IN p_marca_id INT
+)
+BEGIN
+    INSERT INTO servicios_carro (cilindraje, color, marca_id) 
+    VALUES (p_cilindraje, p_color, p_marca_id);
+END //
+DELIMITER ;
+
+-- CALL insertar_carro('3000 cc', 'Verde', 2)
+
+DELIMITER //
+CREATE PROCEDURE obtener_carros()
+BEGIN
+    SELECT Carro.id, Carro.cilindraje, Carro.color, Carro.marca_id 
+    FROM servicios_carro as Carro;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE obtener_carro_por_id(IN p_id INT)
+BEGIN
+    SELECT Carro.id, Carro.cilindraje, Carro.color, Carro.marca_id 
+    FROM servicios_carro as Carro
+    WHERE Carro.id = p_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE actualizar_carro(
+    IN p_id INT, 
+    IN p_cilindraje VARCHAR(200), 
+    IN p_color VARCHAR(200), 
+    IN p_marca_id INT
+)
+BEGIN
+    UPDATE servicios_carro as Carro 
+    SET cilindraje = p_cilindraje, color = p_color, marca_id = p_marca_id 
+    WHERE id = p_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE eliminar_carro(IN p_id INT)
+BEGIN
+    DELETE FROM servicios_carro WHERE id = p_id;
+END //
+DELIMITER ;

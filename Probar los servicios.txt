@@ -1,0 +1,21 @@
+Probar los servicios
+
+GET http://127.0.0.1:8000/api/carros/
+GET http://127.0.0.1:8000/api/carros/1/
+POST http://127.0.0.1:8000/api/carros/
+Content-Type: application/json
+
+{
+    "cilindraje": "2000cc",
+    "color": "Rojo",
+    "marca": 1
+}
+
+PUT http://127.0.0.1:8000/api/carros/1/
+
+{
+    "cilindraje": "2000cc",
+    "color": "Blanco Perlado",
+    "marca": 1
+}
+DELETE http://127.0.0.1:8000/api/carros/1/
